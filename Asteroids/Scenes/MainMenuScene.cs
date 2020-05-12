@@ -15,8 +15,11 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Scenes
 {
-    class MainMenuScene : Scene
+    internal class MainMenuScene : Scene
     {
+        private Vector2 Window => new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth,
+               GraphicsDevice.PresentationParameters.BackBufferHeight);
+
         private GameObject _startButton;
         private GameObject _exitButton;
 
@@ -25,27 +28,27 @@ namespace Asteroids.Scenes
             _startButton = CreateCenterButton("play", new Vector2(0, -50), OnStartClick);
             _exitButton = CreateCenterButton("exit", new Vector2(0, 50), () => Game.Exit());
         }
-
+        private GameObject CreateCenterButton(string name, Vector2 position, Action onClick)
+        {
+            var button = ActorFactory.CreateButton(name, name);
+            Add(button);
+            var box = button.GetComponent<BoxCollider2D>().Bounds;
+            var center = GetCenter(box);
+            button.GetComponent<ButtonController>().OnClick = onClick;
+            button.Transform.Position = new Vector2(center.X + position.X, center.Y + position.Y);
+            return button;
+        }
+        private Vector2 GetCenter(Rectangle box)
+        {
+            return new Vector2(
+                Window.X / 2 - box.Width / 2,
+                Window.Y / 2 - box.Height / 2
+            );
+        }
         private void OnStartClick()
         {
             SceneManager.Instance.LoadScene<GameScene>();
             SceneManager.Instance.SetActiveScene<GameScene>();
-        }
-
-        private GameObject CreateCenterButton(string name, Vector2 position, Action onClick)
-        {
-            Vector2 Window = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth,
-               GraphicsDevice.PresentationParameters.BackBufferHeight);
-            var button = ActorFactory.CreateButton(name, name);
-            Add(button);
-            var box = button.GetComponent<BoxCollider2D>().Box;
-            var center = new Vector2(
-                Window.X / 2 - box.Width / 2,
-                Window.Y / 2 - box.Height / 2
-                );
-            button.GetComponent<ButtonController>().OnClick = onClick;
-            button.Transform.Position = new Vector2(center.X + position.X, center.Y + position.Y);
-            return button;
         }
     }
 }

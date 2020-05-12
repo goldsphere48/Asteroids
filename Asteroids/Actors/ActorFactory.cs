@@ -29,5 +29,35 @@ namespace Asteroids.Actors
             Entity.Synchronize();
             return button;
         }
+
+        public static GameObject CreateShip()
+        {
+            var ship = Entity.Create("StarShip",
+                new SpriteRenderer
+                {
+                    Texture = Content.Load<Texture2D>("ship")
+                },
+                new BoxCollider2D(),
+                new DebugRenderer(),
+                new StarShipController()
+            );
+            Entity.Synchronize();
+            return ship;
+        }
+
+        public static GameObject CreateEnemy()
+        {
+            var enemy = Entity.Create("Enemy",
+                new SpriteRenderer
+                {
+                    Texture = Content.Load<Texture2D>("ship")
+                },
+                new BoxCollider2D(),
+                new DebugRenderer(),
+                new EnemyController()
+            );
+            Entity.Synchronize();
+            return enemy;
+        }
     }
 }
