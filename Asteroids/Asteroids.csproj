@@ -68,7 +68,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MonoChrome\MonoChrome\MonoChrome.csproj">
+    <ProjectReference Include="..\..\goldsphere48\MonoChrome\MonoChrome\MonoChrome.csproj">
       <Project>{e0779d32-a4fe-49a4-957c-dd8555177af0}</Project>
       <Name>MonoChrome</Name>
     </ProjectReference>

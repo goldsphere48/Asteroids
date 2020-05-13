@@ -17,6 +17,7 @@ namespace Asteroids.Components
         {
             if (state.IsKeyDown(Keys.Escape))
             {
+                SceneManager.Instance.UnloadScene<GameScene>();
                 SceneManager.Instance.SetActiveScene<MainMenuScene>();
             }
         }

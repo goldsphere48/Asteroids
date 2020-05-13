@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteroids", "Asteroids\Asteroids.csproj", "{27054530-9BE5-41A3-9A68-8467E629B2C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoChrome", "..\MonoChrome\MonoChrome\MonoChrome.csproj", "{E0779D32-A4FE-49A4-957C-DD8555177AF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoChrome", "..\goldsphere48\MonoChrome\MonoChrome\MonoChrome.csproj", "{E0779D32-A4FE-49A4-957C-DD8555177AF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
