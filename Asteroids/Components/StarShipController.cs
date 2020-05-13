@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
+using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.SceneSystem.Input;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,15 @@ namespace Asteroids.Components
             {
                 var mouse = Mouse.GetState().Position.ToVector2();
                 _transform.MoveTowards(mouse, new Vector2(2, 2));
+            }
+        }
+
+        private void OnCollision(Collision collission)
+        {
+            if (collission.GameObject.Name == "Enemy")
+            {
+                Scene.Remove(collission.GameObject);
+                this.GetComponent<Health>().ApplyDamage(1);
             }
         }
 

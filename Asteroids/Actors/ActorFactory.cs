@@ -1,4 +1,5 @@
 ﻿using Asteroids.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoChrome.Core;
@@ -18,7 +19,7 @@ namespace Asteroids.Actors
         public static ContentManager Content;
         public static GameObject CreateButton(string name, string textureName)
         {
-            var button = Entity.Create(name,
+            return Entity.Create(name,
                 new BoxCollider2D(),
                 new ButtonController(),
                 new SpriteRenderer
@@ -26,23 +27,36 @@ namespace Asteroids.Actors
                     Texture = Content.Load<Texture2D>(textureName)
                 },
                 new DebugRenderer());
+        }
+
+        internal static GameObject CreateHeart()
+        {
+            var heart = Entity.Create("Heart",
+                new SpriteRenderer
+                {
+                    Texture = Content.Load<Texture2D>("heart")
+                }
+            );
             Entity.Synchronize();
-            return button;
+            return heart;
         }
 
         public static GameObject CreateShip()
         {
-            var ship = Entity.Create("StarShip",
+            return Entity.Create("StarShip",
                 new SpriteRenderer
                 {
                     Texture = Content.Load<Texture2D>("ship")
                 },
                 new BoxCollider2D(),
                 new DebugRenderer(),
-                new StarShipController()
+                new StarShipController(),
+                new Health 
+                { 
+                    MaxHealthCount = 3,
+                    HealthCount = 3
+                }
             );
-            Entity.Synchronize();
-            return ship;
         }
 
         public static GameObject CreateEnemy()
@@ -50,14 +64,24 @@ namespace Asteroids.Actors
             var enemy = Entity.Create("Enemy",
                 new SpriteRenderer
                 {
-                    Texture = Content.Load<Texture2D>("ship")
+                    Texture = Content.Load<Texture2D>("enemy")
                 },
                 new BoxCollider2D(),
                 new DebugRenderer(),
-                new EnemyController()
+                new EnemyController(),
+                new Health
+                {
+                    MaxHealthCount = 1,
+                    HealthCount = 1
+                }
             );
             Entity.Synchronize();
             return enemy;
+        }
+
+        public static GameObject CreateGameOverText()
+        {
+            return Entity.Create("GameOverText", new TextRenderer { SpriteFont = Content.Load<SpriteFont>("font")});
         }
     }
 }

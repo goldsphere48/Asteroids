@@ -13,8 +13,9 @@ namespace Asteroids.Components
     {
         private Vector2 _zone = Vector2.Zero;
         private double _timerCounter = 0;
-        private double _timeToSpawn = 4;
+        private double _timeToSpawn = 2;
         private Random _random = new Random();
+        private List<EnemyController> _enemies = new List<EnemyController>();
 
         private void Start()
         {
@@ -25,6 +26,7 @@ namespace Asteroids.Components
         private void SpawnEnemy()
         {
             var enemy = ActorFactory.CreateEnemy();
+            _enemies.Add(enemy.GetComponent<EnemyController>());
             enemy.Transform.Parent = Transform;
             enemy.Transform.Position = new Vector2(_random.Next((int)_zone.X),  _random.Next((int)_zone.Y));
             Scene.Add(enemy);
@@ -38,6 +40,23 @@ namespace Asteroids.Components
                 _timerCounter = 0;
                 SpawnEnemy();
             }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.Enabled = false;
+            }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var enemy in _enemies)
+            {
+                Scene.Remove(enemy.GameObject);
+            }
+            _enemies.Clear();
         }
     }
 }

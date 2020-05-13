@@ -28,9 +28,11 @@ namespace Asteroids.Scenes
             _startButton = CreateCenterButton("play", new Vector2(0, -50), OnStartClick);
             _exitButton = CreateCenterButton("exit", new Vector2(0, 50), () => Game.Exit());
         }
+
         private GameObject CreateCenterButton(string name, Vector2 position, Action onClick)
         {
             var button = ActorFactory.CreateButton(name, name);
+            Entity.Synchronize();
             Add(button);
             var box = button.GetComponent<BoxCollider2D>().Bounds;
             var center = GetCenter(box);

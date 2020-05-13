@@ -46,6 +46,10 @@
     <Compile Include="Components\ButtonController.cs" />
     <Compile Include="Components\EnemyController.cs" />
     <Compile Include="Components\EnemySpawner.cs" />
+    <Compile Include="Components\GameController.cs" />
+    <Compile Include="Components\Health.cs" />
+    <Compile Include="Components\Healthbar.cs" />
+    <Compile Include="Components\IGameState.cs" />
     <Compile Include="Components\ReturnToMenuController.cs" />
     <Compile Include="Components\StarShipController.cs" />
     <Compile Include="Program.cs" />

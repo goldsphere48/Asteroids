@@ -1,11 +1,15 @@
 ﻿using Asteroids.Actors;
 using Asteroids.Components;
 using Microsoft.Xna.Framework;
+using MonoChrome.Core;
+using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.Core.EntityManager;
 using MonoChrome.SceneSystem;
+using MonoChrome.SceneSystem.Layers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,29 +18,61 @@ namespace Asteroids.Scenes
 {
     class GameScene : Scene
     {
+        private GameObject _starShipController;
+        private GameObject _meta;
+        private GameObject _spawner;
+        private GameObject _healthbar;
+        private GameObject _panel;
+        private GameObject _text;
+        private GameObject _restartButton;
+
+        private Vector2 Window => new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth,
+               GraphicsDevice.PresentationParameters.BackBufferHeight);
+
         public override void Setup()
         {
-            var meta = Entity.Create("Meta", new ReturnToMenuController());
+            _meta = Entity.Create("Meta", new ReturnToMenuController(), new GameController());
+            _starShipController = ActorFactory.CreateShip();
+            _spawner = Entity.Create("Spawner", new EnemySpawner());
+            _healthbar = Entity.Create("Healthbar", new Healthbar());
+            _text = ActorFactory.CreateGameOverText();
+            _restartButton = ActorFactory.CreateButton("Restart", "restart");
+            _panel = Entity.Compose("RestartPanel", _text, _restartButton);
             Entity.Synchronize();
-            Add(meta);
-            SpawnShip();
-            CreateEnemySpawner();
         }
+
+        public override void OnEnable()
+        {
+            Add(_meta);
+            SpawnShip();
+            Add(_spawner);
+            CreateHealthbar();
+            CreateRestrartPanel();
+        }
+
 
         private void SpawnShip()
         {
-            var ship = ActorFactory.CreateShip();
-            Add(ship);
-            var bounds = ship.GetComponent<BoxCollider2D>().Bounds;
-            ship.Transform.Position = new Vector2(300, 300);
-            ship.Transform.Origin = new Vector2(bounds.Width / 2, bounds.Height / 2);
+            var size = _starShipController.GetComponent<SpriteRenderer>().Size;
+            _starShipController.Transform.Position = new Vector2(400, 400);
+            _starShipController.Transform.Origin = new Vector2(size.X / 2, size.Y / 2);
+            Add(_starShipController);
         }
 
-        private void CreateEnemySpawner()
+        private void CreateHealthbar()
         {
-            var spawner = Entity.Create("Spawner", new EnemySpawner());
-            Entity.Synchronize();
-            Add(spawner);
+            _healthbar.GetComponent<Healthbar>().Health = _starShipController.GetComponent<Health>();
+            _healthbar.Transform.Position = new Vector2(500, 30);
+            Add(_healthbar);
+        }
+
+        private void CreateRestrartPanel()
+        {
+            _restartButton.GetComponent<ButtonController>().OnClick = _meta.GetComponent<GameController>().Restart;
+            var renderer = _restartButton.GetComponent<SpriteRenderer>();
+            _restartButton.Transform.Position = new Vector2(Window.X / 2 - renderer.Size.X, Window.Y - renderer.Size.Y);
+            _panel.Enabled = false;
+            Add(_panel);
         }
     }
 }
