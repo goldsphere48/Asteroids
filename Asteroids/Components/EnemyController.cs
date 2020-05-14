@@ -13,13 +13,10 @@ namespace Asteroids.Components
     class EnemyController : Component
     {
         [InsertComponent(From = "StarShip")] private Transform _starShipTransform;
-        [InsertComponent] private Transform _transform;
-
+        [InsertComponent] TargetFollower _follower;
         public void Update()
         {
-            _transform.MoveTowards(_starShipTransform.Position, new Vector2(1, 1));
-            var angle = Math.Atan2(_transform.Position.X - _starShipTransform.Position.X, _transform.Position.Y - _starShipTransform.Position.Y);
-            _transform.Angle = -(float)angle;
+            _follower.Follow(_starShipTransform.Position, Vector2.One);
         }
     }
 }

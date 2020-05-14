@@ -16,6 +16,7 @@ namespace Asteroids.Components
     class StarShipController : Component, IKeyboardHandler
     {
         [InsertComponent] private Transform _transform;
+        [InsertComponent(From = "Spawner")] private EnemySpawner _spawner;
 
         public void KeyboardHandle(KeyboardState state)
         {
@@ -30,7 +31,7 @@ namespace Asteroids.Components
         {
             if (collission.GameObject.Name == "Enemy")
             {
-                Scene.Remove(collission.GameObject);
+                _spawner.RemoveEnemy(collission.GameObject);
                 this.GetComponent<Health>().ApplyDamage(1);
             }
         }

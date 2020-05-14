@@ -24,13 +24,14 @@ namespace Asteroids.Components
                 InitHeart(i);
             }
             Health.HealthChanged += OnHealthChanged;
+            Health.DamageApplied += OnDamageApplied;
         }
 
         private void InitHeart(int index)
         {
             _hearts[index] = ActorFactory.CreateHeart();
             _hearts[index].Transform.Parent = Transform;
-            Scene.Add(_hearts[index]);
+            Scene.Instatiate(_hearts[index]);
             PlaceHeart(_hearts[index], index);
         }
 
@@ -42,6 +43,14 @@ namespace Asteroids.Components
         }
 
         private void OnHealthChanged(int newHealth)
+        {
+            for (int i = 0; i < newHealth; ++i)
+            {
+                _hearts[i].Enabled = true;
+            }
+        }
+
+        private void OnDamageApplied(int newHealth)
         {
             _hearts[newHealth].Enabled = false;
         }

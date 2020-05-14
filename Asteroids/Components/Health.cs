@@ -9,6 +9,7 @@ namespace Asteroids.Components
 {
     class Health : Component
     {
+        public event Action<int> DamageApplied;
         public event Action<int> HealthChanged;
         public event Action HealthEnded;
 
@@ -57,7 +58,7 @@ namespace Asteroids.Components
                         _healthCount = 0;
                         HealthEnded?.Invoke();
                     }
-                    HealthChanged?.Invoke(_healthCount);
+                    DamageApplied?.Invoke(_healthCount);
                 }
             }
         }

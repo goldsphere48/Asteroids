@@ -2,6 +2,6 @@
 {
     internal interface IGameState
     {
-        bool GameStoped { get; }
+        bool GameStoped { set;  get; }
     }
 }

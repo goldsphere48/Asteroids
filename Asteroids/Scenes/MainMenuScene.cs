@@ -33,19 +33,12 @@ namespace Asteroids.Scenes
         {
             var button = ActorFactory.CreateButton(name, name);
             Entity.Synchronize();
-            Add(button);
+            Instatiate(button);
             var box = button.GetComponent<BoxCollider2D>().Bounds;
-            var center = GetCenter(box);
+            button.Transform.Origin = new Vector2(box.Size.X / 2, box.Size.Y / 2);
             button.GetComponent<ButtonController>().OnClick = onClick;
-            button.Transform.Position = new Vector2(center.X + position.X, center.Y + position.Y);
+            button.Transform.Position = new Vector2(Window.X / 2 + position.X, Window.Y / 2 + position.Y);
             return button;
-        }
-        private Vector2 GetCenter(Rectangle box)
-        {
-            return new Vector2(
-                Window.X / 2 - box.Width / 2,
-                Window.Y / 2 - box.Height / 2
-            );
         }
         private void OnStartClick()
         {

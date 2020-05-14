@@ -37,15 +37,15 @@ namespace Asteroids.Scenes
             _healthbar = Entity.Create("Healthbar", new Healthbar());
             _text = ActorFactory.CreateGameOverText();
             _restartButton = ActorFactory.CreateButton("Restart", "restart");
-            _panel = Entity.Compose("RestartPanel", _text, _restartButton);
+            _panel = Entity.ComposeNew("RestartPanel", _text, _restartButton);
             Entity.Synchronize();
         }
 
         public override void OnEnable()
         {
-            Add(_meta);
+            Instatiate(_meta);
             SpawnShip();
-            Add(_spawner);
+            Instatiate(_spawner);
             CreateHealthbar();
             CreateRestrartPanel();
         }
@@ -56,23 +56,24 @@ namespace Asteroids.Scenes
             var size = _starShipController.GetComponent<SpriteRenderer>().Size;
             _starShipController.Transform.Position = new Vector2(400, 400);
             _starShipController.Transform.Origin = new Vector2(size.X / 2, size.Y / 2);
-            Add(_starShipController);
+            Instatiate(_starShipController);
         }
 
         private void CreateHealthbar()
         {
             _healthbar.GetComponent<Healthbar>().Health = _starShipController.GetComponent<Health>();
             _healthbar.Transform.Position = new Vector2(500, 30);
-            Add(_healthbar);
+            Instatiate(_healthbar);
         }
 
         private void CreateRestrartPanel()
         {
             _restartButton.GetComponent<ButtonController>().OnClick = _meta.GetComponent<GameController>().Restart;
             var renderer = _restartButton.GetComponent<SpriteRenderer>();
-            _restartButton.Transform.Position = new Vector2(Window.X / 2 - renderer.Size.X, Window.Y - renderer.Size.Y);
+            _text.Transform.LocalPosition = new Vector2(0, -50);
+            _restartButton.Transform.LocalPosition = new Vector2(0, 50);
             _panel.Enabled = false;
-            Add(_panel);
+            Instatiate(_panel);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Asteroids.Actors;
 using Microsoft.Xna.Framework;
 using MonoChrome.Core;
+using MonoChrome.Core.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,25 @@ namespace Asteroids.Components
 {
     class EnemySpawner : Component
     {
+        [InsertComponent(From = "Meta")] private GameController _controller;
         private Vector2 _zone = Vector2.Zero;
         private double _timerCounter = 0;
-        private double _timeToSpawn = 2;
+        private double _timeToSpawn = 4;
         private Random _random = new Random();
         private List<EnemyController> _enemies = new List<EnemyController>();
+
+        public void RemoveEnemy(GameObject enemy)
+        {
+            _enemies.Remove(enemy.GetComponent<EnemyController>());
+            Scene.Destroy(enemy);
+        }
 
         private void Start()
         {
             _zone.X = GraphicsDevice.PresentationParameters.BackBufferWidth;
             _zone.Y = GraphicsDevice.PresentationParameters.BackBufferHeight;
+            _controller.GameOver += OnGameOver;
+            _controller.GameStart += OnGameStart;
         }
 
         private void SpawnEnemy()
@@ -29,7 +39,7 @@ namespace Asteroids.Components
             _enemies.Add(enemy.GetComponent<EnemyController>());
             enemy.Transform.Parent = Transform;
             enemy.Transform.Position = new Vector2(_random.Next((int)_zone.X),  _random.Next((int)_zone.Y));
-            Scene.Add(enemy);
+            Scene.Instatiate(enemy);
         }
 
         private void Update()
@@ -42,7 +52,7 @@ namespace Asteroids.Components
             }
         }
 
-        private void OnDisable()
+        private void OnGameOver()
         {
             foreach (var enemy in _enemies)
             {
@@ -50,11 +60,11 @@ namespace Asteroids.Components
             }
         }
 
-        private void OnEnable()
+        private void OnGameStart()
         {
             foreach (var enemy in _enemies)
             {
-                Scene.Remove(enemy.GameObject);
+                Scene.Destroy(enemy.GameObject);
             }
             _enemies.Clear();
         }

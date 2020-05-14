@@ -51,12 +51,29 @@ namespace Asteroids.Actors
                 new BoxCollider2D(),
                 new DebugRenderer(),
                 new StarShipController(),
+                new Gun(),
                 new Health 
                 { 
                     MaxHealthCount = 3,
                     HealthCount = 3
                 }
             );
+        }
+
+        public static GameObject CreateBullet(Vector2 dir, Vector2 position)
+        {
+            var bullet = Entity.Create("Bullet",
+                new SpriteRenderer 
+                {
+                    Texture = Content.Load<Texture2D>("bullet")
+                },
+                new Bullet(dir),
+                new BoxCollider2D(),
+                new TargetFollower()
+            );
+            bullet.Transform.Position = position;
+            Entity.Synchronize();
+            return bullet;
         }
 
         public static GameObject CreateEnemy()
@@ -69,6 +86,7 @@ namespace Asteroids.Actors
                 new BoxCollider2D(),
                 new DebugRenderer(),
                 new EnemyController(),
+                new TargetFollower(),
                 new Health
                 {
                     MaxHealthCount = 1,
