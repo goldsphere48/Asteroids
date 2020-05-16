@@ -11,6 +11,8 @@ namespace Asteroids.Components
 {
     class Score : Component
     {
+        [InsertComponent(From = "Meta")] private GameController _colntroller;
+        [InsertComponent] TextRenderer _text;
         public int Points
         {
             get => _points;
@@ -21,11 +23,11 @@ namespace Asteroids.Components
             }
         }
 
-        [InsertComponent] TextRenderer _text;
         private int _points = 0;
 
         private void Awake()
         {
+            _colntroller.GameStart += Restart;
             UpdateText(0);
         }
 

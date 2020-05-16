@@ -17,6 +17,9 @@ namespace Asteroids.Components
     {
         [InsertComponent] private Transform _transform;
         [InsertComponent(From = "Spawner")] private EnemySpawner _spawner;
+        [InsertComponent(From = "Meta")] private GameController _colntroller;
+        [InsertComponent] private Gun _gun;
+        [InsertComponent] private Health _health;
 
         public void KeyboardHandle(KeyboardState state)
         {
@@ -25,6 +28,27 @@ namespace Asteroids.Components
                 var mouse = Mouse.GetState().Position.ToVector2();
                 _transform.MoveTowards(mouse, new Vector2(2, 2));
             }
+        }
+
+        private void Awake()
+        {
+            _colntroller.GameOver += OnGameOver;
+            _colntroller.GameStart += OnGameStart;
+        }
+
+        public void OnGameOver()
+        {
+            Enabled = false;
+            _gun.Enabled = false;
+        }
+
+        public void OnGameStart()
+        {
+            Enabled = true;
+            _gun.Enabled = true;
+            Transform.Position = new Vector2(400, 400);
+            Transform.Angle = 0;
+            _health.HealthCount = 3;
         }
 
         private void OnCollision(Collision collission)

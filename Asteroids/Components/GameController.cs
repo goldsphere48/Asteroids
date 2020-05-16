@@ -45,9 +45,7 @@ namespace Asteroids.Components
         {
             GameStoped = false;
             _spawner.Enabled = true;
-            _shipController.Enabled = true;
             _restartPanel.Enabled = false;
-            _health.HealthCount = 3;
         }
 
         private void Start()
@@ -58,7 +56,6 @@ namespace Asteroids.Components
         private void OnHealthEnded()
         {
             _spawner.Enabled = false;
-            _shipController.Enabled = false;
             var gameOverText = _restartPanel.GetComponentInChildren<TextRenderer>();
             gameOverText.Text = "Game is over!";
             _restartPanel.Transform.Position = new Vector2(Window.X / 2, Window.Y / 2);

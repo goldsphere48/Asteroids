@@ -7,6 +7,7 @@ using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.Core.EntityManager;
 using MonoChrome.SceneSystem;
+using MonoChrome.SceneSystem.Layers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,7 @@ namespace Asteroids.Scenes
         private GameObject CreateCenterButton(string name, Vector2 position, Action onClick)
         {
             var button = ActorFactory.CreateButton(name, name);
-            
-            Instatiate(button);
+            Instatiate(button, DefaultLayers.UI);
             var box = button.GetComponent<BoxCollider2D>().Bounds;
             button.Transform.Origin = new Vector2(box.Size.X / 2, box.Size.Y / 2);
             button.GetComponent<ButtonController>().OnClick = onClick;
