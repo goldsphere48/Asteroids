@@ -61,7 +61,7 @@ namespace Asteroids.Components
             _shipController.Enabled = false;
             var gameOverText = _restartPanel.GetComponentInChildren<TextRenderer>();
             gameOverText.Text = "Game is over!";
-            _restartPanel.Transform.Position = new Vector2(Window.X / 2 - gameOverText.Size.X / 2, Window.Y / 2 - gameOverText.Size.Y / 2);
+            _restartPanel.Transform.Position = new Vector2(Window.X / 2, Window.Y / 2);
             _restartPanel.Enabled = true;
             GameStoped = true;
         }

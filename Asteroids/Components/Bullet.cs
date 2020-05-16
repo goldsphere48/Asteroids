@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
+using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,16 @@ namespace Asteroids.Components
             _direction = direction;
         }
 
+        private void Start()
+        {
+            GetComponent<SpriteRenderer>().BecomeInvisible += BecomeInvisible;
+        }
+
+        private void BecomeInvisible(Renderer obj)
+        {
+            Destroy(GameObject);
+        }
+
         private void OnCollision(Collision collision)
         {
             if (collision.GameObject.Name == "Enemy")
@@ -32,10 +43,6 @@ namespace Asteroids.Components
         private void Update()
         {
             Transform.Position += Vector2.Multiply(_direction, 8);
-            if (Transform.Position.X < 0 || Transform.Position.Y > 0)
-            {
-                Destroy(GameObject);
-            }
         }
     }
 }
