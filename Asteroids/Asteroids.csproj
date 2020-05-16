@@ -53,6 +53,7 @@
     <Compile Include="Components\Healthbar.cs" />
     <Compile Include="Components\IGameState.cs" />
     <Compile Include="Components\ReturnToMenuController.cs" />
+    <Compile Include="Components\Score.cs" />
     <Compile Include="Components\StarShipController.cs" />
     <Compile Include="Components\TargetFollower.cs" />
     <Compile Include="Program.cs" />

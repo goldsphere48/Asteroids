@@ -31,7 +31,7 @@ namespace Asteroids.Components
         {
             _hearts[index] = ActorFactory.CreateHeart();
             _hearts[index].Transform.Parent = Transform;
-            Scene.Instatiate(_hearts[index]);
+            Instatiate(_hearts[index]);
             PlaceHeart(_hearts[index], index);
         }
 

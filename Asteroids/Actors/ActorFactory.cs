@@ -37,7 +37,7 @@ namespace Asteroids.Actors
                     Texture = Content.Load<Texture2D>("heart")
                 }
             );
-            Entity.Synchronize();
+            
             return heart;
         }
 
@@ -60,6 +60,16 @@ namespace Asteroids.Actors
             );
         }
 
+        public static GameObject CreateScoreBoard()
+        {
+            return Entity.Create("Score", 
+                new TextRenderer
+                {
+                    SpriteFont = Content.Load<SpriteFont>("font")
+                },
+                new Score());
+        }
+
         public static GameObject CreateBullet(Vector2 dir, Vector2 position)
         {
             var bullet = Entity.Create("Bullet",
@@ -72,7 +82,7 @@ namespace Asteroids.Actors
                 new TargetFollower()
             );
             bullet.Transform.Position = position;
-            Entity.Synchronize();
+            
             return bullet;
         }
 
@@ -93,7 +103,7 @@ namespace Asteroids.Actors
                     HealthCount = 1
                 }
             );
-            Entity.Synchronize();
+            
             return enemy;
         }
 

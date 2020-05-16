@@ -22,7 +22,7 @@ namespace Asteroids.Components
         public void RemoveEnemy(GameObject enemy)
         {
             _enemies.Remove(enemy.GetComponent<EnemyController>());
-            Scene.Destroy(enemy);
+            Destroy(enemy);
         }
 
         private void Start()
@@ -39,7 +39,7 @@ namespace Asteroids.Components
             _enemies.Add(enemy.GetComponent<EnemyController>());
             enemy.Transform.Parent = Transform;
             enemy.Transform.Position = new Vector2(_random.Next((int)_zone.X),  _random.Next((int)_zone.Y));
-            Scene.Instatiate(enemy);
+            Instatiate(enemy);
         }
 
         private void Update()
@@ -64,7 +64,7 @@ namespace Asteroids.Components
         {
             foreach (var enemy in _enemies)
             {
-                Scene.Destroy(enemy.GameObject);
+                Destroy(enemy.GameObject);
             }
             _enemies.Clear();
         }

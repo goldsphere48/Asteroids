@@ -9,6 +9,7 @@ using MonoChrome.SceneSystem;
 using MonoChrome.SceneSystem.Layers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Asteroids.Scenes
         private GameObject _panel;
         private GameObject _text;
         private GameObject _restartButton;
+        private GameObject _scoreBoard;
 
         private Vector2 Window => new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth,
                GraphicsDevice.PresentationParameters.BackBufferHeight);
@@ -38,7 +40,7 @@ namespace Asteroids.Scenes
             _text = ActorFactory.CreateGameOverText();
             _restartButton = ActorFactory.CreateButton("Restart", "restart");
             _panel = Entity.ComposeNew("RestartPanel", _text, _restartButton);
-            Entity.Synchronize();
+            _scoreBoard = ActorFactory.CreateScoreBoard();
         }
 
         public override void OnEnable()
@@ -48,6 +50,7 @@ namespace Asteroids.Scenes
             Instatiate(_spawner);
             CreateHealthbar();
             CreateRestrartPanel();
+            CreateScoreBoard();
         }
 
 
@@ -57,6 +60,12 @@ namespace Asteroids.Scenes
             _starShipController.Transform.Position = new Vector2(400, 400);
             _starShipController.Transform.Origin = new Vector2(size.X / 2, size.Y / 2);
             Instatiate(_starShipController);
+        }
+
+        private void CreateScoreBoard()
+        {
+            _scoreBoard.Transform.Position = new Vector2(120, 40);
+            Instatiate(_scoreBoard);
         }
 
         private void CreateHealthbar()

@@ -32,7 +32,7 @@ namespace Asteroids.Scenes
         private GameObject CreateCenterButton(string name, Vector2 position, Action onClick)
         {
             var button = ActorFactory.CreateButton(name, name);
-            Entity.Synchronize();
+            
             Instatiate(button);
             var box = button.GetComponent<BoxCollider2D>().Bounds;
             button.Transform.Origin = new Vector2(box.Size.X / 2, box.Size.Y / 2);

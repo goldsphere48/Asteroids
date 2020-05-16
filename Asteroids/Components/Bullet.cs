@@ -14,6 +14,7 @@ namespace Asteroids.Components
     class Bullet : Component
     {
         [InsertComponent(From = "Spawner", Required = true)] private EnemySpawner _spawner;
+        [InsertComponent(From = "Score", Required = true)] private Score _score;
         private Vector2 _direction;
 
         public Bullet(Vector2 direction)
@@ -37,6 +38,7 @@ namespace Asteroids.Components
             {
                 _spawner.RemoveEnemy(collision.GameObject);
                 Destroy(GameObject);
+                _score.IncreasePoints();
             }
         }
 
