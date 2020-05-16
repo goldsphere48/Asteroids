@@ -3,16 +3,12 @@ using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class GameController : Component, IGameState
+    internal class GameController : Component, IGameState
     {
-        public bool GameStoped 
+        public bool GameStoped
         {
             get => _gameStoped = true;
             set
@@ -21,7 +17,8 @@ namespace Asteroids.Components
                 if (_gameStoped)
                 {
                     GameOver?.Invoke();
-                } else
+                }
+                else
                 {
                     GameStart?.Invoke();
                 }

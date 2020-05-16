@@ -6,17 +6,13 @@ using MonoChrome.Core;
 using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.Core.EntityManager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Actors
 {
-    static class ActorFactory
+    internal static class ActorFactory
     {
         public static ContentManager Content;
+
         public static GameObject CreateButton(string name, string textureName)
         {
             return Entity.Create(name,
@@ -25,20 +21,17 @@ namespace Asteroids.Actors
                 new SpriteRenderer
                 {
                     Texture = Content.Load<Texture2D>(textureName)
-                },
-                new DebugRenderer());
+                });
         }
 
         internal static GameObject CreateHeart()
         {
-            var heart = Entity.Create("Heart",
+            return Entity.Create("Heart",
                 new SpriteRenderer
                 {
                     Texture = Content.Load<Texture2D>("heart")
                 }
             );
-            
-            return heart;
         }
 
         public static GameObject CreateShip()
@@ -49,11 +42,10 @@ namespace Asteroids.Actors
                     Texture = Content.Load<Texture2D>("ship")
                 },
                 new BoxCollider2D(),
-                new DebugRenderer(),
                 new StarShipController(),
                 new Gun(),
-                new Health 
-                { 
+                new Health
+                {
                     MaxHealthCount = 3,
                     HealthCount = 3
                 }
@@ -62,7 +54,7 @@ namespace Asteroids.Actors
 
         public static GameObject CreateScoreBoard()
         {
-            return Entity.Create("Score", 
+            return Entity.Create("Score",
                 new TextRenderer
                 {
                     SpriteFont = Content.Load<SpriteFont>("font")
@@ -73,28 +65,24 @@ namespace Asteroids.Actors
         public static GameObject CreateBullet(Vector2 dir, Vector2 position)
         {
             var bullet = Entity.Create("Bullet",
-                new SpriteRenderer 
+                new SpriteRenderer
                 {
                     Texture = Content.Load<Texture2D>("bullet")
                 },
                 new Bullet(dir),
-                new BoxCollider2D(),
                 new TargetFollower()
             );
             bullet.Transform.Position = position;
-            
             return bullet;
         }
 
         public static GameObject CreateEnemy()
         {
-            var enemy = Entity.Create("Enemy",
+            return Entity.Create("Enemy",
                 new SpriteRenderer
                 {
                     Texture = Content.Load<Texture2D>("enemy")
                 },
-                new BoxCollider2D(),
-                new DebugRenderer(),
                 new EnemyController(),
                 new TargetFollower(),
                 new Health
@@ -103,13 +91,11 @@ namespace Asteroids.Actors
                     HealthCount = 1
                 }
             );
-            
-            return enemy;
         }
 
         public static GameObject CreateGameOverText()
         {
-            return Entity.Create("GameOverText", new TextRenderer { SpriteFont = Content.Load<SpriteFont>("font")});
+            return Entity.Create("GameOverText", new TextRenderer { SpriteFont = Content.Load<SpriteFont>("font") });
         }
     }
 }

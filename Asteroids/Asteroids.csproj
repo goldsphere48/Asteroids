@@ -40,6 +40,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Asteroids.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actors\ActorFactory.cs" />
     <Compile Include="AsteroidGame.cs" />
@@ -62,6 +65,9 @@
     <Compile Include="Scenes\MainMenuScene.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MonoChrome">
+      <HintPath>lib\MonoChrome.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -74,12 +80,6 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\goldsphere48\MonoChrome\MonoChrome\MonoChrome.csproj">
-      <Project>{e0779d32-a4fe-49a4-957c-dd8555177af0}</Project>
-      <Name>MonoChrome</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

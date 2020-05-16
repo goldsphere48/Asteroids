@@ -4,13 +4,10 @@ using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class EnemySpawner : Component
+    internal class EnemySpawner : Component
     {
         [InsertComponent(From = "Meta")] private GameController _controller;
         private Vector2 _zone = Vector2.Zero;
@@ -38,7 +35,7 @@ namespace Asteroids.Components
             var enemy = ActorFactory.CreateEnemy();
             _enemies.Add(enemy.GetComponent<EnemyController>());
             enemy.Transform.Parent = Transform;
-            enemy.Transform.Position = new Vector2(_random.Next((int)_zone.X),  _random.Next((int)_zone.Y));
+            enemy.Transform.Position = new Vector2(_random.Next((int)_zone.X), _random.Next((int)_zone.Y));
             Instatiate(enemy);
         }
 

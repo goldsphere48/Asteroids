@@ -1,17 +1,11 @@
 ﻿using Asteroids.Actors;
 using Microsoft.Xna.Framework;
 using MonoChrome.Core;
-using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class Healthbar : Component
+    internal class Healthbar : Component
     {
         public Health Health { private get; set; }
         private GameObject[] _hearts;

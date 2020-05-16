@@ -3,16 +3,10 @@ using Asteroids.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoChrome.Core;
-using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
-using MonoChrome.Core.EntityManager;
 using MonoChrome.SceneSystem;
 using MonoChrome.SceneSystem.Layers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Scenes
 {
@@ -40,6 +34,7 @@ namespace Asteroids.Scenes
             button.Transform.Position = new Vector2(Window.X / 2 + position.X, Window.Y / 2 + position.Y);
             return button;
         }
+
         private void OnStartClick()
         {
             SceneManager.Instance.LoadScene<GameScene>();

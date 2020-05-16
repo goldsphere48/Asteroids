@@ -1,21 +1,17 @@
 ﻿using MonoChrome.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class Health : Component
+    internal class Health : Component
     {
         public event Action<int> DamageApplied;
         public event Action<int> HealthChanged;
         public event Action HealthEnded;
 
-        public int MaxHealthCount 
-        { 
-            get => _maxHealthCount; 
+        public int MaxHealthCount
+        {
+            get => _maxHealthCount;
             set
             {
                 if (value >= 0)
@@ -26,10 +22,10 @@ namespace Asteroids.Components
                         _healthCount = _maxHealthCount;
                     }
                 }
-            } 
+            }
         }
 
-        public int HealthCount 
+        public int HealthCount
         {
             get => _healthCount;
             set

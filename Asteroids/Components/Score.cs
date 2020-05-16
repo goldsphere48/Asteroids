@@ -1,18 +1,13 @@
 ﻿using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class Score : Component
+    internal class Score : Component
     {
         [InsertComponent(From = "Meta")] private GameController _colntroller;
-        [InsertComponent] TextRenderer _text;
+        [InsertComponent] private TextRenderer _text;
         public int Points
         {
             get => _points;

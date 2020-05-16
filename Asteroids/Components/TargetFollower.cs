@@ -3,17 +3,13 @@ using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class TargetFollower : Component
+    internal class TargetFollower : Component
     {
         public event Action Finished;
-        [InsertComponent] Transform _transform;
+        [InsertComponent] private Transform _transform;
 
         public void Follow(Vector2 target, Vector2 speed)
         {

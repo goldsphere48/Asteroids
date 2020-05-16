@@ -3,15 +3,10 @@ using MonoChrome.Core;
 using MonoChrome.Core.Attributes;
 using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class Bullet : Component
+    internal class Bullet : Component
     {
         [InsertComponent(From = "Spawner", Required = true)] private EnemySpawner _spawner;
         [InsertComponent(From = "Score", Required = true)] private Score _score;

@@ -2,18 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoChrome.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class Gun : Component
+    internal class Gun : Component
     {
         private double _timerCounter = 0;
         private float _shootSpeed = 0.2f;
+
         private void Update()
         {
             _timerCounter += Time.DeltaTime;

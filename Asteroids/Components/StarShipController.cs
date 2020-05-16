@@ -6,14 +6,10 @@ using MonoChrome.Core.Components;
 using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.SceneSystem.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Components
 {
-    class StarShipController : Component, IKeyboardHandler
+    internal class StarShipController : Component, IKeyboardHandler
     {
         [InsertComponent] private Transform _transform;
         [InsertComponent(From = "Spawner")] private EnemySpawner _spawner;

@@ -2,16 +2,14 @@
 using Asteroids.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoChrome.SceneSystem;
-using System;
 
 namespace Asteroids
 {
     public class AsteroidGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         public AsteroidGame()
         {
@@ -21,7 +19,6 @@ namespace Asteroids
             IsMouseVisible = true;
         }
 
-        
         protected override void Initialize()
         {
             SceneManager.Instance.GraphicsDevice = graphics.GraphicsDevice;
@@ -30,7 +27,6 @@ namespace Asteroids
             base.Initialize();
         }
 
-        
         protected override void LoadContent()
         {
             SceneManager.Instance.LoadScene<MainMenuScene>();
@@ -42,7 +38,6 @@ namespace Asteroids
         {
             SceneManager.Instance.UnloadScene<MainMenuScene>();
         }
-
 
         protected override void Update(GameTime gameTime)
         {

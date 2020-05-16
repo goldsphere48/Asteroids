@@ -3,21 +3,12 @@ using Asteroids.Components;
 using Microsoft.Xna.Framework;
 using MonoChrome.Core;
 using MonoChrome.Core.Components;
-using MonoChrome.Core.Components.CollisionDetection;
 using MonoChrome.Core.EntityManager;
 using MonoChrome.SceneSystem;
-using MonoChrome.SceneSystem.Layers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Scenes
 {
-    class GameScene : Scene
+    internal class GameScene : Scene
     {
         private GameObject _starShipController;
         private GameObject _meta;
@@ -52,7 +43,6 @@ namespace Asteroids.Scenes
             CreateRestrartPanel();
             CreateScoreBoard();
         }
-
 
         private void SpawnShip()
         {
